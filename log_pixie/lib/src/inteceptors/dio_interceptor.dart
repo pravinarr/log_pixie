@@ -1,15 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:log_pixie/src/logger/loggers.dart';
+import 'package:log_pixie/src/model/logger_base.dart';
 
-class DioInterceptor extends Interceptor {
+class PixieDioInterceptor extends Interceptor {
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
     if (kDebugMode) {
-      LogPixie.logHttps(_requestToJson(options));
+      LogPixie.logNetwork(_requestToJson(options));
     }
     super.onRequest(options, handler);
   }
@@ -20,28 +21,21 @@ class DioInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     if (kDebugMode) {
-      LogPixie.logHttps(_responseToJson(response));
+      LogPixie.logNetwork(_responseToJson(response));
     }
     super.onResponse(response, handler);
   }
 
   Map<String, dynamic> _responseToJson(Response response) {
-    return {
-      'statusCode': response.statusCode,
-      'data': response.data,
-      'headers': response.headers.map,
-      'request': _requestToJson(response.requestOptions),
-    };
+    return HttpResponseData.fromDioResponse(
+      response,
+    ).toJson();
   }
 
   //method to convert request to json
   Map<String, dynamic> _requestToJson(RequestOptions request) {
-    return {
-      'method': request.method,
-      'path': request.path,
-      'queryParameters': request.queryParameters,
-      'data': request.data,
-      'headers': request.headers,
-    };
+    return HttpRequestData.fromDioRequest(
+      request,
+    ).toJson();
   }
 }

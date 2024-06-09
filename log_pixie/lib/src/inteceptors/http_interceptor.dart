@@ -10,11 +10,11 @@ class HttpInterceptor extends http.BaseClient {
   @override
   Future<http.StreamedResponse> send(request) {
     if (kDebugMode) {
-      LogPixie.logHttps(_requestToJson(request as http.Request));
+      LogPixie.logNetwork(_requestToJson(request as http.Request));
     }
     final response = _inner.send(request);
     if (kDebugMode) {
-      LogPixie.logHttps(_responseToJson(request as http.Response));
+      LogPixie.logNetwork(_responseToJson(request as http.Response));
     }
     return response;
   }

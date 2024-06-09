@@ -5,13 +5,13 @@ import 'package:flutter/foundation.dart';
 
 const String logPixie = 'log_pixie';
 
-enum LogType { message, error, warning, https }
+enum LogType { info, error, warning, network }
 
 class LogPixie {
   static void logInfo(String message, [Map<String, String>? data]) {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
-        'type': LogType.message.name,
+        'type': LogType.info.name,
         'message': message,
         'data': jsonEncode(data),
       });
@@ -38,10 +38,10 @@ class LogPixie {
     }
   }
 
-  static void logHttps(Map<String, dynamic>? data) {
+  static void logNetwork(Map<String, dynamic>? data) {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
-        'type': LogType.https.name,
+        'type': LogType.network.name,
         'data': jsonEncode(data),
       });
     }
