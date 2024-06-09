@@ -24,6 +24,7 @@ class HttpInterceptor extends http.BaseClient {
     return {
       'method': request.method,
       'url': request.url,
+      'queryParams': request.url.queryParameters,
       'headers': request.headers,
       'body': request.body,
     };
