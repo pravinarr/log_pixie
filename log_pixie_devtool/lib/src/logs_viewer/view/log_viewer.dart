@@ -31,6 +31,11 @@ class _LogsViewerState extends State<LogsViewer> {
   /// Whether the list should automatically scroll to the bottom when a new log is added.
   bool _shouldAutoScroll = true;
 
+  bool _showNetworkLogs = true;
+  bool _showInfoLogs = true;
+  bool _showWarningLogs = true;
+  bool _showErrorLogs = true;
+
   late ScrollController _scrollController;
   late StreamSubscription? _streamSubscription;
 
@@ -65,6 +70,102 @@ class _LogsViewerState extends State<LogsViewer> {
         leading: const Image(image: AssetImage('assets/log_pixie.png')),
         title: const Text('Log Pixie'),
         actions: [
+          Tooltip(
+            message: 'Network logs',
+            child: Row(
+              children: [
+                const Text(
+                  'Network',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                Checkbox(
+                  value: _showNetworkLogs,
+                  onChanged: (value) {
+                    setState(() {
+                      _showNetworkLogs = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Tooltip(
+            message: 'Info logs',
+            child: Row(
+              children: [
+                const Text(
+                  'Info',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                Checkbox(
+                  value: _showInfoLogs,
+                  onChanged: (value) {
+                    setState(() {
+                      _showInfoLogs = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Tooltip(
+            message: 'Warning logs',
+            child: Row(
+              children: [
+                const Text(
+                  'Warning',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                Checkbox(
+                  value: _showWarningLogs,
+                  onChanged: (value) {
+                    setState(() {
+                      _showWarningLogs = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Tooltip(
+            message: 'Error',
+            child: Row(
+              children: [
+                const Text(
+                  'Error',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                Checkbox(
+                  value: _showErrorLogs,
+                  onChanged: (value) {
+                    setState(() {
+                      _showErrorLogs = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
           Tooltip(
             message: 'Hot restart the app',
             child: IconButton(
@@ -109,15 +210,29 @@ class _LogsViewerState extends State<LogsViewer> {
           ),
         ],
       ),
-      body: ListView.builder(
-        controller: _scrollController,
-        itemBuilder: (context, index) => switch (logs[index].type) {
-          LogType.info => InfoViewer(log: logs[index]),
-          LogType.warning => WarningViewer(log: logs[index]),
-          LogType.error => ErrorViewer(log: logs[index]),
-          LogType.network => HttpViewer(log: logs[index]),
-        },
-        itemCount: logs.length,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: ListView.builder(
+          controller: _scrollController,
+          itemBuilder: (context, index) => switch (logs[index].type) {
+            LogType.info => _showInfoLogs
+                ? InfoViewer(log: logs[index])
+                : const SizedBox.shrink(),
+            LogType.warning => _showWarningLogs
+                ? WarningViewer(log: logs[index])
+                : const SizedBox.shrink(),
+            LogType.error => _showErrorLogs
+                ? ErrorViewer(log: logs[index])
+                : const SizedBox.shrink(),
+            LogType.network => _showNetworkLogs
+                ? HttpViewer(
+                    log: logs[index],
+                    showOnlyErrors: !_showErrorLogs,
+                  )
+                : const SizedBox.shrink(),
+          },
+          itemCount: logs.length,
+        ),
       ),
     );
   }

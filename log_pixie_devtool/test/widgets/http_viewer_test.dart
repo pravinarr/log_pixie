@@ -27,7 +27,10 @@ void main() {
     // Create the HttpViewer widget
     final widget = MaterialApp(
       home: Scaffold(
-        body: HttpViewer(log: logData),
+        body: HttpViewer(
+          log: logData,
+          showOnlyErrors: false,
+        ),
       ),
     );
 
