@@ -227,7 +227,6 @@ class _LogsViewerState extends State<LogsViewer> {
             LogType.network => _showNetworkLogs
                 ? HttpViewer(
                     log: logs[index],
-                    showOnlyErrors: !_showErrorLogs,
                   )
                 : const SizedBox.shrink(),
           },

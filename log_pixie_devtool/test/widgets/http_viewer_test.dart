@@ -29,7 +29,6 @@ void main() {
       home: Scaffold(
         body: HttpViewer(
           log: logData,
-          showOnlyErrors: false,
         ),
       ),
     );

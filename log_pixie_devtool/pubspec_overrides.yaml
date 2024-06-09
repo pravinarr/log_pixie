@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: log_pixie
+dependency_overrides:
+  log_pixie:
+    path: ../log_pixie

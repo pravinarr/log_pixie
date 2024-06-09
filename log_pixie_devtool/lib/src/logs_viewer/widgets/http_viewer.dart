@@ -19,34 +19,36 @@ class HttpViewer extends StatelessWidget {
   /// The [log] parameter must not be null.
   const HttpViewer({
     required this.log,
-    required this.showOnlyErrors,
     super.key,
   });
 
   /// The log data to display.
   final LogData log;
 
-  final bool showOnlyErrors;
   @override
   Widget build(BuildContext context) {
-    if (showOnlyErrors &&
-        (!log.isHttpResponse || log.networkResponse.statusCode < 500)) {
-      return const SizedBox();
-    }
     return ExpansionTile(
-        leading: Chip(
-          label: Text(
-            log.type.name,
-            style: const TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.grey.shade200,
-        ),
+        controlAffinity: ListTileControlAffinity.leading,
         title: Row(
           children: [
             const SizedBox(
               width: 8,
             ),
+            Chip(
+              label: Text(
+                log.type.name,
+                style: const TextStyle(color: Colors.black),
+              ),
+              backgroundColor: Colors.grey.shade200,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
             _DisplayMethod(log: log),
+            const SizedBox(
+              width: 8,
+            ),
+            Flexible(child: _DisplayPath(log: log)),
             const SizedBox(
               width: 8,
             ),
@@ -60,7 +62,6 @@ class HttpViewer extends StatelessWidget {
             if (log.isHttpResponse) _ShowStatusCode(log: log),
           ],
         ),
-        subtitle: _DisplayPath(log: log),
         children: [
           SizedBox(
             height: 200,

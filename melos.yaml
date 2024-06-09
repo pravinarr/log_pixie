@@ -1,0 +1,18 @@
+name: log_pixie
+packages:
+  - log_pixie
+  - log_pixie_devtool
+
+scripts:
+  analyze:
+    exec: flutter analyze .
+
+  test:
+    exec: flutter test .
+
+  build_local:
+    name: Build extension to current directory
+    run: |
+      cd log_pixie_devtool
+      flutter pub get
+      fvm dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools

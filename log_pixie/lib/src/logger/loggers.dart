@@ -22,8 +22,8 @@ class LogPixie {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
         'type': LogType.error.name,
-        'error': error,
-        'stackTrace': stackTrace.toString(),
+        'message': error,
+        'data': jsonEncode({'stackTrace': stackTrace?.toString() ?? ''}),
       });
     }
   }

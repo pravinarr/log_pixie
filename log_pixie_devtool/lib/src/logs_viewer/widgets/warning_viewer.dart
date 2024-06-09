@@ -27,6 +27,7 @@ class WarningViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+        controlAffinity: ListTileControlAffinity.leading,
         title: Row(
           children: [
             Chip(
