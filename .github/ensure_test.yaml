@@ -1,0 +1,28 @@
+name: Run Melos Tests
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.6"
+
+      - name: Install Melos
+        run: pub global activate melos
+
+      - name: Analyze
+        run: |
+          melos bootstrap
+          melos run analyze
+
+      - name: Test
+        run: melos run test
