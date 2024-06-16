@@ -1,7 +1,7 @@
 
 # log_pixie
 
-<img src="https://github.com/pravinarr/log_pixie/log_pixie_devtool/assets/log_pixie.png" width="128"/>
+<img src="https://github.com/pravinarr/log_pixie/blob/main/log_pixie_devtool/assets/log_pixie.png" width="128"/>
 
 ## Description
 log_pixie is a flutter devtool extension to show logs of your application during development. 
