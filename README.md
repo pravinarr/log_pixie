@@ -1,23 +1,20 @@
+
 # log_pixie
 
-## Description
-log_pixie is a powerful logging library designed to simplify logging in your applications. It provides a lightweight and intuitive API for logging messages with different levels of severity.
+<img src="log_pixie_devtool/assets/log_pixie.png" width="128"/>
 
-## Features
-- Easy to use: log_pixie offers a simple and straightforward API, making it easy to integrate into your projects.
-- Multiple log levels: log_pixie supports different log levels, including  INFO, WARNING, and ERROR, NETWORK allowing you to control the verbosity of your logs.
+## Description
+log_pixie is a simple logging tool for your applications during development. 
 
 
 ## Installation
-To install log_pixie, follow these steps:
-
-1. Open your terminal or command prompt.
-2. Navigate to your project directory.
-3. Run the following command to install log_pixie via npm:
 
     
      flutter pub add log_pixie
     
+### Note
+
+Eventhough you are adding this to you app's dependency, it will only work in debug mode.
 
 ## Usage
 
@@ -43,7 +40,7 @@ Also following http interceptors are available to add to your http client of cho
 
     
 
-If you are using http package then use ```HttpInterceptor``` to create the client or you can directly use ``` LogPixie.logNetwork(Map<String, dynamic>? data)``` method
+If you are using http package then use ```HttpInterceptor``` from this project to create the client or you can directly use ``` LogPixie.logNetwork(Map<String, dynamic>? data)``` method
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the log_pixie GitHub repository.

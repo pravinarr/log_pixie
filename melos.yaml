@@ -7,9 +7,6 @@ scripts:
   analyze:
     exec: flutter analyze .
 
-  test:
-    exec: flutter test .
-
   build_local:
     name: Build extension to current directory
     run: |
@@ -17,3 +14,9 @@ scripts:
       flutter pub get
       fvm dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
   
+  publish:
+    name: Publish extension
+    run: |
+      cd log_pixie
+      flutter pub get
+      flutter pub publish --dry-run
