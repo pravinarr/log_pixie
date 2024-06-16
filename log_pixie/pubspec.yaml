@@ -1,6 +1,7 @@
 name: log_pixie
-description: "A new Flutter package project."
+description: "Devtool for Flutter to view logs in a beautiful way."
 version: 0.0.1
+repository: https://github.com/pravinarr/log_pixie
 
 environment:
   sdk: ">=3.3.3 <4.0.0"
