@@ -15,33 +15,33 @@ To install log_pixie, follow these steps:
 2. Navigate to your project directory.
 3. Run the following command to install log_pixie via npm:
 
-    ```
+    
      flutter pub add log_pixie
-    ```
+    
 
 ## Usage
 
 Import log_pixie into your project 
 
-    ```
+    
     import 'package:log_pixie/log_pixie.dart';
-    ```
+    
 
 There are four available methods to log
 
-    ```
+    
      LogPixie.logInfo(String message, [Map<String, String>? data])
      LogPixie.logError(String error, [StackTrace? stackTrace])
      LogPixie.logWarning(String warning, [Map<String, String>? data])
      LogPixie.logNetwork(Map<String, dynamic>? data)
-    ```
+    
 
 Also following http interceptors are available to add to your http client of choice
 
-    ```
+    
         PixieDioInterceptor();
 
-    ```
+    
 
 If you are using http package then use ```HttpInterceptor``` to create the client or you can directly use ``` LogPixie.logNetwork(Map<String, dynamic>? data)``` method
 

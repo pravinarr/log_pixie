@@ -11,6 +11,7 @@ class LogPixie {
   static void logInfo(String message, [Map<String, String>? data]) {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
+        'when': DateTime.now().toString(),
         'type': LogType.info.name,
         'message': message,
         'data': jsonEncode(data),
@@ -21,6 +22,7 @@ class LogPixie {
   static void logError(String error, [StackTrace? stackTrace]) {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
+        'when': DateTime.now().toString(),
         'type': LogType.error.name,
         'message': error,
         'data': jsonEncode({'stackTrace': stackTrace?.toString() ?? ''}),
@@ -31,6 +33,7 @@ class LogPixie {
   static void logWarning(String warning, [Map<String, String>? data]) {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
+        'when': DateTime.now().toString(),
         'type': LogType.warning.name,
         'message': warning,
         'data': jsonEncode(data),
@@ -41,6 +44,7 @@ class LogPixie {
   static void logNetwork(Map<String, dynamic>? data) {
     if (kDebugMode) {
       developer.postEvent(logPixie, <String, String>{
+        'when': DateTime.now().toString(),
         'type': LogType.network.name,
         'data': jsonEncode(data),
       });

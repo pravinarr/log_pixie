@@ -4,25 +4,40 @@ import 'package:dio/dio.dart';
 import 'package:log_pixie/src/logger/loggers.dart';
 
 class LogData {
+  final String when;
   final LogType type;
   final Map<String, dynamic>? data;
   final String? message;
 
-  LogData({required this.type, this.data, this.message});
+  LogData({required this.type, required this.when, this.data, this.message});
 
   static LogData fromJson(Map<String, dynamic> json) {
     return LogData(
+        when: json['when'],
         type: LogType.values
             .firstWhere((element) => element.name == json['type']),
         data: json['data'] == 'null' ? null : jsonDecode(json['data']),
         message: json['message']);
   }
 
+  bool get isNetworkLog => type == LogType.network;
+
+  String get buildTypeString =>
+      '${type.name} ${isNetworkLog ? ' - ${isHttpResponse ? 'Response' : 'Request'}' : ''}';
+
   bool get isHttpResponse =>
       type == LogType.network ? data!['statusCode'] != null : false;
 
-  HttpRequestData get networkRequest => HttpRequestData.fromJson(data!);
+  HttpRequestData get networkRequest => isHttpResponse
+      ? HttpResponseData.fromJson(data!).request
+      : HttpRequestData.fromJson(data!);
   HttpResponseData get networkResponse => HttpResponseData.fromJson(data!);
+
+  String get curl => type == LogType.network
+      ? isHttpResponse
+          ? networkResponse.request.toCurl()
+          : networkRequest.toCurl()
+      : '';
 }
 
 class HttpRequestData {
@@ -106,6 +121,14 @@ class HttpResponseData {
       'data': data,
       'headers': headers,
       'request': request.toJson()
+    };
+  }
+
+  Map<String, dynamic> toSelectiveJson() {
+    return {
+      'statusCode': statusCode,
+      'data': data,
+      'headers': headers,
     };
   }
 

@@ -7,6 +7,7 @@ void main() {
   testWidgets('ErrorViewer Widget Test', (WidgetTester tester) async {
     // Create a fake log data
     final logData = LogData(
+      when: DateTime.now().toString(),
       type: LogType.error, // replace with your actual LogType
       message: 'Test error message',
       data: {}, // replace with your actual data

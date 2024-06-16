@@ -17,8 +17,7 @@ class LogPixieDevToolExtension extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DevToolsExtension(
-      child: RoundedOutlinedBorder(
-          child: LogsViewer()), // Build your extension here
+      child: RoundedOutlinedBorder(child: LogsViewer()),
     );
   }
 }

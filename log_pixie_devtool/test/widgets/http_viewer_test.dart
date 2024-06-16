@@ -7,6 +7,7 @@ void main() {
   testWidgets('HttpViewer Widget Test', (WidgetTester tester) async {
     // Create a fake log data
     final logData = LogData(
+      when: DateTime.now().toString(),
       type: LogType.network,
       data: <String, dynamic>{
         'statusCode': 200,
