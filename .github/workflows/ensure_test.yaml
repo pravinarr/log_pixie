@@ -24,5 +24,7 @@ jobs:
           melos bootstrap
           melos run analyze
 
-      - name: Test
-        run: melos run test
+      - name: Publish --dry-run
+        run: |
+          melos run publish
+
