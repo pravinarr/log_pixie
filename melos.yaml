@@ -20,10 +20,23 @@ scripts:
       cd log_pixie_devtool
       flutter pub get
       dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
-  
+
   publish:
     name: Publish extension
     run: |
-      cd log_pixie
+      cd log_pixie_devtool
+      flutter pub get
+      dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
+      cd ../log_pixie
       flutter pub get
       flutter pub publish --dry-run
+
+  publish_local:
+    name: Publish extension
+    run: |
+      cd log_pixie_devtool
+      fvm flutter pub get
+      fvm dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
+      cd ../log_pixie
+      fvm flutter pub get
+      fvm flutter pub publish
