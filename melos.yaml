@@ -16,3 +16,4 @@ scripts:
       cd log_pixie_devtool
       flutter pub get
       fvm dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
+  

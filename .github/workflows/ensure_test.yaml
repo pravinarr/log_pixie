@@ -17,7 +17,7 @@ jobs:
           flutter-version: "3.19.6"
 
       - name: Install Melos
-        run: pub global activate melos
+        run: flutter pub global activate melos
 
       - name: Analyze
         run: |
