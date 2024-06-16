@@ -13,6 +13,13 @@ scripts:
       cd log_pixie_devtool
       flutter pub get
       fvm dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
+
+  build:
+    name: Build extension to current directory
+    run: |
+      cd log_pixie_devtool
+      flutter pub get
+      dart run devtools_extensions build_and_copy --source=. --dest=../log_pixie/extension/devtools
   
   publish:
     name: Publish extension
