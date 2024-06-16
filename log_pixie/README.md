@@ -1,39 +1,53 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+# log_pixie
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+<img src="https://github.com/pravinarr/log_pixie/log_pixie_devtool/assets/log_pixie.png" width="128"/>
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Description
+log_pixie is a flutter devtool extension to show logs of your application during development. 
 
-## Features
+## Demo 
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+![log_pixie_demo](https://github.com/pravinarr/log_pixie/assets/8682635/dff783a3-43bf-4772-a438-394c7bd73813)
 
-## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## Installation
+
+    
+     flutter pub add log_pixie
+    
+### Note
+
+Eventhough you are adding this to you app's dependency, it will only work in debug mode.
+
+Also you might be asked to enable the devtool after adding it to your project.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Import log_pixie into your project 
 
-```dart
-const like = 'sample';
-```
+    
+    import 'package:log_pixie/log_pixie.dart';
+    
 
-## Additional information
+There are four available methods to log
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+    
+     LogPixie.logInfo(String message, [Map<String, String>? data])
+     LogPixie.logError(String error, [StackTrace? stackTrace])
+     LogPixie.logWarning(String warning, [Map<String, String>? data])
+     LogPixie.logNetwork(Map<String, dynamic>? data)
+    
+
+Also following http interceptors are available to add to your http client of choice
+
+    
+        PixieDioInterceptor();
+
+    
+
+If you are using http package then use ```HttpInterceptor``` from this project to create the client or you can directly use ``` LogPixie.logNetwork(Map<String, dynamic>? data)``` method
+
+## Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the log_pixie GitHub repository.
+
